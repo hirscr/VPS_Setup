@@ -1,4 +1,4 @@
-##Secure access to linux server for ubuntu 18-20
+## Secure access to linux server for ubuntu 18-20
 
 This procedure is for setting up secure access to a linux computer or VPS
 It assumes you have already set up a VPS at a service like digital ocean or OVH
@@ -7,18 +7,18 @@ it also assumes that once its installed, you know how to run it.
 Once you have gained root access you may follow these steps to 1) set up a secure server and then 2) set up a Divi wallet
 
 
-#First update linux
+# First update linux
 
     sudo apt update    (depending on your provider, you may or may not need sudo)
     sudo apt upgrade
     sudo apt reboot
 
-#After reconnecting set up a user and grant the root privillidges
+# After reconnecting set up a user and grant the root privillidges
 
     adduser johndoe (follow along with setting up password, use numbers and letters only! dont worry about address or room number)
     usermod -a -G sudo johndoe
 
-#Now change the SSH connection characteristics
+# Now change the SSH connection characteristics
 
     sudo nano /etc/ssh/sshd_config
     Change: 
@@ -34,7 +34,7 @@ Once you have gained root access you may follow these steps to 1) set up a secur
     Verify this connection works
     THEN close root login window (you will not be able to use this connection again)
 
-#Now logged in as your super user (johndoe in this case),
+# Now logged in as your super user (johndoe in this case),
 
     sudo apt install fail2ban   (this will prevent login after 2 failed attempts)
     sometimes to get it to work:
@@ -43,7 +43,7 @@ Once you have gained root access you may follow these steps to 1) set up a secur
         sudo rm -rf /etc/fail2ban/
         sudo apt-get install fail2ban
 
-#Set up swap file, this will use some hard drive space for memory not accessed often
+# Set up swap file, this will use some hard drive space for memory not accessed often
     
     sudo fallocate -l 2G /newswapfile
     sudo chmod 600 /newswapfile
@@ -56,16 +56,17 @@ Once you have gained root access you may follow these steps to 1) set up a secur
     see Swappiness
         cat /proc/sys/vm/swappiness
 
-#At this point you have a secure VPS that you can access with username and password
-#The rest is about how to install a Divi node. You can probably easily substitute other blockchain nodes
+# At this point you have a secure VPS that you can access with username and password
+# The rest is about how to install a Divi node. You can probably easily substitute other blockchain nodes
 
-#Install unzip
+# Install unzip
+
     sudo apt install unzip
          
-    copy link from https://github.com/DiviProject/Divi/releases/  
-    depends on which is the latest version, it should be in the form: divi-x.x.x-x86_64-linux-gnu-xxxxxx.tar.gz
+# copy link from https://github.com/DiviProject/Divi/releases/  
+# depends on which is the latest version, it should be in the form: divi-x.x.x-x86_64-linux-gnu-xxxxxx.tar.gz
 
-#Install Divi
+# Install Divi
     wget https://github.com/DiviProject/Divi/releases/xxx/divi-x.x.x-x86_64-linux-gnu-xxxxxx.tar.gz
     tar -xvf divi-x.x.x-x86_64-linux-gnu-xxxxxx.tar.gz
     
